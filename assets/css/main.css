@@ -3219,3 +3219,19 @@ input, select, textarea {
 			}
 
 	}
+.section-logo {
+    text-align: side;
+    margin: -2;
+    padding: -2;
+}
+
+.section-logo img {
+    width: 380px;
+    max-width: 95%;
+}
+
+/* Remove extra space from heading */
+header.major {
+    margin-top: -2;
+    padding-top: -2;
+}
