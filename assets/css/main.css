@@ -3234,3 +3234,14 @@ header.major {
     margin-top: 0;
     padding-top: 0;
 }
+.cursor {
+    display: inline-block;
+    margin-left: 4px;
+    font-weight: bold;
+    animation: blink 2s step-end infinite;
+}
+
+@keyframes blink {
+    0%, 50%, 100% { border-color: transparent; }
+    25%, 75% { border-color: white; }
+}
