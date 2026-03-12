@@ -113,5 +113,21 @@
 				});
 
 			});
+// Typewriter effect
+$(window).on('load', function() {
+    const text = "a digital marketing professional turning ideas into measurable online growth.";
+    const $target = $('#typing-text');
+    let index = 0;
+    const speed = 40; // typing speed in ms
 
+    function type() {
+        if (index < text.length) {
+            $target.append(text.charAt(index));
+            index++;
+            setTimeout(type, speed);
+        }
+    }
+
+    type();
+});
 })(jQuery);
