@@ -1,343 +1,158 @@
-<!DOCTYPE HTML>
-
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blogs | Laxman Choudhary</title>
-
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-
 <meta name="description" content="Ideas, insights and marketing strategies by Laxman Choudhary covering email marketing, lead generation and digital growth.">
 
-<link rel="stylesheet" href="assets/css/main.css" />
-<link rel="icon" type="image/png" href="images/favicon.png">
+<!-- Tailwind CSS CDN for JIT optimized styling -->
+<script src="https://cdn.tailwindcss.com"></script>
 
-<!-- Google Font -->
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;700&family=Montserrat:wght@600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
+  /* Custom variables for gradients & animations */
+  :root {
+    --color-primary: #2aa99a;
+    --color-primary-dark: #22806e;
+    --gradient-text: linear-gradient(90deg, #2aa99a, #49bf9d, #2aa99a);
+  }
 
-.featured-card{
-border:1px solid rgba(0,0,0,0.08);
-padding:10px;
-border-radius:8px;
-}
+  /* Animated gradient background */
+  #animated-bg {
+    position: fixed;
+    inset:0;
+    z-index:-10;
+    background: linear-gradient(-45deg, #e8f6f3, #d9f0ec, #fefefe, #f0fcf9);
+    background-size: 400% 400%;
+    animation: gradientBG 25s ease infinite;
+    pointer-events:none;
+  }
 
-body{
-font-family:'Poppins',sans-serif;
-}
+  @keyframes gradientBG {
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+  }
 
-/* Remove left sidebar space */
-#main{
-margin-left:0;
-width:100%;
-max-width:1100px;
-margin:auto;
-padding:60px 20px;
-}
+  /* Floating circles */
+  .circle {
+    position:absolute;
+    border-radius:50%;
+    background: rgba(42,169,154,0.12);
+    will-change: transform, opacity;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+  }
 
-/* Logo */
-.blog-logo{
-text-align:center;
-margin-bottom:25px;
-}
+  .circle.small{width:35px;height:35px;animation-name:floatSmall;animation-duration:6s;}
+  .circle.medium{width:60px;height:60px;animation-name:floatMedium;animation-duration:9s;}
+  .circle.large{width:100px;height:100px;animation-name:floatLarge;animation-duration:12s;}
 
-.blog-logo img{
-width:130px;
-}
+  @keyframes floatSmall{0%{transform:translateY(0) translateX(0);opacity:.15;}50%{transform:translateY(-20px) translateX(10px);opacity:.22;}100%{transform:translateY(0) translateX(0);opacity:.15;}}
+  @keyframes floatMedium{0%{transform:translateY(0) translateX(0);opacity:.12;}50%{transform:translateY(-30px) translateX(-15px);opacity:.18;}100%{transform:translateY(0) translateX(0);opacity:.12;}}
+  @keyframes floatLarge{0%{transform:translateY(0) translateX(0);opacity:.1;}50%{transform:translateY(-40px) translateX(20px);opacity:.15;}100%{transform:translateY(0) translateX(0);opacity:.1;}}
 
-/* Header */
-
-.blog-header{
-text-align:center;
-margin-bottom:60px;
-}
-
-.blog-header h1{
-font-size:48px;
-font-weight:700;
-margin-bottom:10px;
-}
-
-.blog-header h2{
-font-size:22px;
-font-weight:500;
-margin-bottom:10px;
-}
-
-.blog-header p{
-font-size:16px;
-opacity:0.8;
-}
-
-/* Featured blog */
-
-.featured-blog img{
-border-radius:8px;
-}
-
-.featured-blog{
-margin-bottom:60px;
-}
-
-/* Blog hover animation */
-
-.work-item{
-transition:all .35s ease;
-}
-
-.work-item:hover{
-transform:translateY(-8px);
-box-shadow:0 12px 30px rgba(0,0,0,0.15);
-}
-
-/* Blog meta */
-
-.blog-meta{
-font-size:13px;
-opacity:.7;
-margin-bottom:8px;
-}
-
-/* Footer icons */
-
-.footer-icons{
-text-align:center;
-margin-top:70px;
-}
-
-.footer-icons ul{
-list-style:none;
-padding:0;
-}
-
-.footer-icons li{
-display:inline-block;
-margin:0 12px;
-}
-
-.footer-icons a{
-font-size:22px;
-}
-
-.footer-text{
-text-align:center;
-margin-top:15px;
-font-size:14px;
-opacity:.7;
-}
-
+  /* Fade + slide animations for headers and cards */
+  .fade-slide { opacity:0; transform:translateY(30px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.4,0,0.2,1);}
+  .fade-slide.visible { opacity:1; transform:translateY(0);}
+  .gradient-text { background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 </style>
-
 </head>
+<body class="bg-white font-roboto overflow-x-hidden">
 
-<body class="is-preload">
-
-<div id="main">
-
-<!-- Logo -->
-
-<div class="blog-logo">
-<a href="index.html">
-<img src="images/logo1.jpg" alt="Laxman Choudhary Logo">
-</a>
+<!-- Animated background -->
+<div id="animated-bg" aria-hidden="true">
+  <div class="circle small" style="top:10%; left:5%; animation-delay:0s;"></div>
+  <div class="circle medium" style="top:25%; left:70%; animation-delay:2s;"></div>
+  <div class="circle large" style="top:60%; left:40%; animation-delay:1.5s;"></div>
+  <div class="circle small" style="top:80%; left:80%; animation-delay:3s;"></div>
+  <div class="circle medium" style="top:50%; left:20%; animation-delay:4s;"></div>
 </div>
 
-<!-- Header -->
-
-<div class="blog-header">
-
-<h1>BLOGS</h1>
-
-<h2>Ideas, Insights & Stories</h2>
-
-<p>
-Marketing strategy, email campaigns and growth insights.
-</p>
-
-</div>
-
-<!-- Featured Blog -->
-
-<section class="featured-blog">
-
-<h2 style="margin-bottom:25px;">Featured Article</h2>
-
-<div class="row">
-
-<article class="col-6 col-12-xsmall work-item featured-card">
-
-<a href="#" class="image fit thumb">
-<img src="images/fulls/01.jpg" alt="">
-</a>
-
-<h3>Email Campaign Optimization Guide</h3>
-
-<div class="blog-meta">
-June 2026 • 5 min read
-</div>
-
-<p>
-Learn how segmentation, personalization and analytics can significantly
-improve open rates and conversion rates in modern email marketing.
-</p>
-
-<ul class="actions">
-<li><a href="#" class="button small">Read Article</a></li>
-</ul>
-
-</article>
-
-</div>
-
-</section>
-
-<!-- Blog Grid -->
-
-<section>
-
-<div class="row">
-
-<article class="col-6 col-12-xsmall work-item">
-
-<a href="#" class="image fit thumb">
-<img src="images/thumbs/02.jpg" alt="">
-</a>
-
-<h3>Building High-Converting Lead Funnels</h3>
-
-<div class="blog-meta">
-May 2026 • 4 min read
-</div>
-
-<p>
-A step-by-step system to create scalable lead generation funnels
-that consistently deliver qualified prospects.
-</p>
-
-</article>
-
-<article class="col-6 col-12-xsmall work-item">
-
-<a href="#" class="image fit thumb">
-<img src="images/thumbs/03.jpg" alt="">
-</a>
-
-<h3>Why Data-Driven Marketing Wins</h3>
-
-<div class="blog-meta">
-May 2026 • 6 min read
-</div>
-
-<p>
-Understand which metrics matter most and how marketers use
-analytics to optimize campaigns and drive business growth.
-</p>
-
-</article>
-
-<article class="col-6 col-12-xsmall work-item">
-
-<a href="#" class="image fit thumb">
-<img src="images/thumbs/04.jpg" alt="">
-</a>
-
-<h3>Audience Engagement Strategies</h3>
-
-<div class="blog-meta">
-April 2026 • 5 min read
-</div>
-
-<p>
-Discover modern engagement strategies that improve customer
-retention and build strong brand relationships.
-</p>
-
-</article>
-
-<article class="col-6 col-12-xsmall work-item">
-
-<a href="#" class="image fit thumb">
-<img src="images/thumbs/05.jpg" alt="">
-</a>
-
-<h3>Marketing Automation for Growth</h3>
-
-<div class="blog-meta">
-April 2026 • 4 min read
-</div>
-
-<p>
-Automation tools help businesses streamline marketing workflows,
-improve efficiency and nurture leads effectively.
-</p>
-
-</article>
-
-</div>
-
-</section>
-
-<!-- Footer Icons -->
-
-<div class="footer-icons">
-
-<ul class="icons">
-
-<li>
-<a href="#" class="icon brands fa-facebook">
-<span class="label">Facebook</span>
-</a>
-</li>
-
-<li>
-<a href="#" class="icon brands fa-instagram">
-<span class="label">Instagram</span>
-</a>
-</li>
-
-<li>
-<a href="https://wa.me/919309794805?text=Hi%20Laxman,%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20connect."
-target="_blank"
-class="icon brands fa-whatsapp">
-<span class="label">WhatsApp</span>
-</a>
-</li>
-
-<li>
-<a href="https://mail.google.com/mail/?view=cm&fs=1&to=claxman241@gmail.com"
-target="_blank"
-class="icon solid fa-envelope">
-<span class="label">Email</span>
-</a>
-</li>
-
-</ul>
-
-<div class="footer-text">
-
-© Laxman Choudhary • Marketing Blog
-
-</div>
-
-</div>
-
-</div>
-
-<!-- Scripts -->
-
-<script src="assets/js/jquery.min.js"></script>
-
-<script src="assets/js/jquery.poptrox.min.js"></script>
-
-<script src="assets/js/browser.min.js"></script>
-
-<script src="assets/js/breakpoints.min.js"></script>
-
-<script src="assets/js/util.js"></script>
-
-<script src="assets/js/main.js"></script>
+<main id="main" class="max-w-[1150px] mx-auto py-12 px-6 relative z-10">
+
+  <!-- Logo -->
+  <div class="text-center mb-10 fade-slide">
+    <a href="index.html" aria-label="Home">
+      <img src="images/logo1.jpg" alt="Laxman Choudhary Logo" class="mx-auto w-[140px] max-w-full"/>
+    </a>
+  </div>
+
+  <!-- Header -->
+  <header class="text-center bg-[#f9fcfc] rounded-xl shadow-md p-10 mb-14 fade-slide">
+    <span class="block text-sm font-bold text-[#2aa99a] tracking-widest uppercase mb-3">Articles</span>
+    <h1 class="text-5xl font-bold gradient-text mb-2">BLOGS</h1>
+    <h2 class="text-2xl font-semibold italic mb-3 text-gray-900">Ideas, Insights & Stories</h2>
+    <p class="text-gray-600 max-w-xl mx-auto">Marketing strategy, email campaigns and growth insights.</p>
+  </header>
+
+  <!-- Featured Articles -->
+  <section aria-labelledby="featured-articles-title" class="fade-slide">
+    <h2 id="featured-articles-title" class="text-3xl font-bold gradient-text mb-10">Featured Articles</h2>
+    <div class="grid md:grid-cols-2 gap-8">
+
+      <!-- Blog Card Template -->
+      <div class="relative group">
+        <div class="absolute -inset-2 bg-gradient-to-r from-teal-400 to-teal-600 blur-3xl opacity-30 rounded-2xl transition-all duration-500 group-hover:opacity-50"></div>
+        <article class="relative bg-white rounded-2xl shadow-md p-6 hover:shadow-xl transition-transform duration-300 ease-out transform hover:-translate-y-2 fade-slide">
+          <a href="#"><img src="images/fulls/01.jpg" alt="Email Campaign Optimization Guide" class="rounded-xl h-48 w-full object-cover mb-4 transition-transform duration-300 group-hover:scale-105"/></a>
+          <h3 class="text-xl font-bold gradient-text mb-2">Email Campaign Optimization Guide</h3>
+          <p class="text-gray-500 text-sm mb-3">June 2026 • 5 min read</p>
+          <p class="text-gray-600 mb-4">Learn how segmentation, personalization and analytics can improve open rates and conversions.</p>
+          <a href="#" class="inline-block px-5 py-2 bg-[#2aa99a] hover:bg-[#22806e] text-white font-semibold rounded-lg transition-transform duration-300 hover:scale-105">Read Article</a>
+        </article>
+      </div>
+
+      <div class="relative group">
+        <div class="absolute -inset-2 bg-gradient-to-r from-teal-400 to-teal-600 blur-3xl opacity-30 rounded-2xl transition-all duration-500 group-hover:opacity-50"></div>
+        <article class="relative bg-white rounded-2xl shadow-md p-6 hover:shadow-xl transition-transform duration-300 ease-out transform hover:-translate-y-2 fade-slide">
+          <a href="#"><img src="images/thumbs/02.jpg" alt="Building High-Converting Lead Funnels" class="rounded-xl h-48 w-full object-cover mb-4 transition-transform duration-300 group-hover:scale-105"/></a>
+          <h3 class="text-xl font-bold gradient-text mb-2">Building High-Converting Lead Funnels</h3>
+          <p class="text-gray-500 text-sm mb-3">May 2026 • 4 min read</p>
+          <p class="text-gray-600 mb-4">Step-by-step system to create scalable lead generation funnels that consistently deliver prospects.</p>
+          <a href="#" class="inline-block px-5 py-2 bg-[#2aa99a] hover:bg-[#22806e] text-white font-semibold rounded-lg transition-transform duration-300 hover:scale-105">Read Article</a>
+        </article>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="mt-16 text-center fade-slide">
+    <ul class="flex justify-center gap-10 mb-4">
+      <li><a href="#" class="text-2xl text-gray-600 hover:text-[#2aa99a] transition-transform transform hover:scale-125" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+      <li><a href="#" class="text-2xl text-gray-600 hover:text-[#2aa99a] transition-transform transform hover:scale-125" aria-label="Instagram"><i class="fab fa-instagram"></i></a></li>
+      <li><a href="https://wa.me/919309794805" class="text-2xl text-gray-600 hover:text-[#2aa99a] transition-transform transform hover:scale-125" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a></li>
+      <li><a href="mailto:claxman241@gmail.com" class="text-2xl text-gray-600 hover:text-[#2aa99a] transition-transform transform hover:scale-125" aria-label="Email"><i class="fas fa-envelope"></i></a></li>
+    </ul>
+    <p class="text-gray-500">&copy; Laxman Choudhary • Marketing Blog</p>
+  </footer>
+
+</main>
+
+<script>
+  // Efficient fade-slide observer using IntersectionObserver
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); });
+  }, { threshold: 0.2 });
+
+  document.querySelectorAll('.fade-slide').forEach(el => observer.observe(el));
+
+  // Background parallax effect
+  const circles = document.querySelectorAll('#animated-bg .circle');
+  document.addEventListener('mousemove', e => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 20;
+    const y = (e.clientY / window.innerHeight - 0.5) * 20;
+    circles.forEach((c, i) => c.style.transform = `translate(${x*(i+1)/2}px, ${y*(i+1)/2}px)`);
+  });
+</script>
 
 </body>
 </html>
